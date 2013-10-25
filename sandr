@@ -1,35 +1,35 @@
 a=0
 def check
-if File.file?("config")
-	line = IO.readlines("config")
-	filetosandr = File.new(line[0].chop,"a+")
-	search = line[1].chop
-	replace = line[2].chop
-	puts "Searching in file "+line[0].chop + " for the value: "+ search+" to be replaced by: "+replace	
-	File.open(filetosandr,"a+") do |config|	
-	contents = File.read(filetosandr)
-	File.open(filetosandr,"w+")
-	contents = contents.gsub(search, replace)
-	filetosandr.syswrite(contents)	
-end
-else
-	puts "No configuration file found!"
-	puts "Generating a new one now..."
-	config = File.new("config","w+")
-	puts "Please enter the name of the file to be searched"
-	file = gets
-	config.syswrite(file)
-	puts "\nPlease enter the value to search for"
-	search = gets
-	config.syswrite(search)
-	puts "\nPlease enter the value to replace all found instances"
-	replace = gets
-	config.syswrite(replace)
-	config.close
-	check
-end
+  if File.file?("config")
+    line = IO.readlines("config")
+    filetosandr = File.new(line[0].chop,"a+")
+    search = line[1].chop
+    replace = line[2].chop
+    puts "Searching in file "+line[0].chop + " for the value: "+ search+" to be replaced by: "+replace	
+    File.open(filetosandr,"a+") do |config|	
+      contents = File.read(filetosandr)
+      File.open(filetosandr,"w+")
+      contents = contents.gsub(search, replace)
+      filetosandr.syswrite(contents)	
+    end
+  else
+    puts "No configuration file found!"
+    puts "Generating a new one now..."
+    config = File.new("config","w+")
+    puts "Please enter the name of the file to be searched"
+    file = gets
+    config.syswrite(file)
+    puts "\nPlease enter the value to search for"
+    search = gets
+    config.syswrite(search)
+    puts "\nPlease enter the value to replace all found instances"
+    replace = gets
+    config.syswrite(replace)
+    config.close
+    check
+  end
 end
 if a==0 then
-	a+=1
-	check
+  a+=1
+  check
 end
