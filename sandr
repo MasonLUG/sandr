@@ -1,0 +1,25 @@
+if File.file?("config")
+	line = IO.readlines("config")
+	file = line[0].chop
+	search = line[1].chop
+	replace = line[2].chop
+	puts "Searching in file "+file + " for the value: "+ search+" to be replaced by: "+replace	
+	File.open(file,"w") do |config|	
+	contents = File.read(file)
+	contents = contents.gsub(/search/, replace)	
+end
+else
+	puts "No configuration file found!"
+	puts "Generating a new one now..."
+	config = File.new("config","w+")
+	puts "Please enter the name of the file to be searched"
+	file = gets
+	config.syswrite(file)
+	puts "\nPlease enter the value to search for"
+	search = gets
+	config.syswrite(search)
+	puts "\nPlease enter the value to replace all found instances"
+	replace = gets
+	config.syswrite(replace)
+	config.close
+end
