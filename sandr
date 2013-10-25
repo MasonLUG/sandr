@@ -1,3 +1,5 @@
+a=0
+def check
 if File.file?("config")
 	line = IO.readlines("config")
 	filetosandr = File.new(line[0].chop,"a+")
@@ -24,4 +26,10 @@ else
 	replace = gets
 	config.syswrite(replace)
 	config.close
+	check
+end
+end
+if a==0 then
+	a+=1
+	check
 end
