@@ -1,35 +1,76 @@
-a=0
+require 'getoptlong'
+$a=0
+$argsgiven=false
+opts = GetoptLong.new(
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
+  [ '--file', '-f', GetoptLong::REQUIRED_ARGUMENT ],
+  [ '--search', '-s', GetoptLong::REQUIRED_ARGUMENT],
+  [ '--replace', '-r', GetoptLong::REQUIRED_ARGUMENT],
+)
+opts.each do |opt, arg|
+  case opt
+    when '--help' || '-h'
+      puts <<-EOF
+
+sandr can be run with no arguments, it takes values from a config file which it will create when it runs.  The search value will be replaced by the replace value specified.
+operations:
+	sandr {-h --help}
+	sandr {-f --file} <file>
+	sandr {-s --search} <value>
+	sandr {-r --replace} <value>
+	EOF
+      abort("");
+    when '--file' || '-f'
+      $argsgiven=true
+      $filetosandr=File.new(arg,"a+")
+    when '--search' || '-s'
+      $argsgiven=true
+      $search=arg
+    when '--replace' || '-r'
+      $argsgiven=true
+      $replace=arg
+  end
+end
+def sandr(f,s,r)
+  puts "Searching in file "+File.basename(f)+File.extname(f) + " for the value: "+ s+" to be replaced by: "+r	
+  File.open(f,"a+") do |config|	
+    contents = File.read(f)
+    File.open(f,"w+")
+    contents = contents.gsub(s, r)
+    f.syswrite(contents)	
+  end
+end
 def check
-  if File.file?("config")
+  if $argsgiven==true
+    if $filetosandr==nil || $search==nil || $replace==nil
+      abort( "If specified: file, search, and replace all need proper arguments\n(try --help)")
+      
+    end
+    sandr($filetosandr,$search,$replace)
+  elsif File.exists?("config")
     line = IO.readlines("config")
     filetosandr = File.new(line[0].chop,"a+")
     search = line[1].chop
     replace = line[2].chop
-    puts "Searching in file "+line[0].chop + " for the value: "+ search+" to be replaced by: "+replace	
-    File.open(filetosandr,"a+") do |config|	
-      contents = File.read(filetosandr)
-      File.open(filetosandr,"w+")
-      contents = contents.gsub(search, replace)
-      filetosandr.syswrite(contents)	
-    end
+    sandr(filetosandr,search,replace)
   else
     puts "No configuration file found!"
     puts "Generating a new one now..."
     config = File.new("config","w+")
     puts "Please enter the name of the file to be searched"
-    file = gets
-    config.syswrite(file)
+    fileg = gets
+    config.syswrite(fileg)
     puts "\nPlease enter the value to search for"
-    search = gets
-    config.syswrite(search)
+    searchg = gets
+    config.syswrite(searchg)
     puts "\nPlease enter the value to replace all found instances"
-    replace = gets
-    config.syswrite(replace)
+    replaceg = gets
+    config.syswrite(replaceg)
     config.close
     check
   end
 end
-if a==0 then
-  a+=1
+if $a==0 then
+  $a+=1
   check
 end
