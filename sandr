@@ -32,7 +32,7 @@ operations:
   end
 end
 def sandr(f,s,r)
-  puts "Searching in file "+File.basename(f)+File.extname(f) + " for the value: "+ s+" to be replaced by: "+r	
+  puts "Searching in file "+File.basename(f) + " for the value: "+ s+" to be replaced by: "+r	
   File.open(f,"a+") do |config|	
     contents = File.read(f)
     File.open(f,"w+")
@@ -47,7 +47,7 @@ def check
       
     end
     sandr($filetosandr,$search,$replace)
-  elsif File.exists?("config")
+  elsif File.exists?("config") && !(File.zero?("config"))
     line = IO.readlines("config")
     filetosandr = File.new(line[0].chop,"a+")
     search = line[1].chop
