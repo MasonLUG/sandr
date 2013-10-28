@@ -6,18 +6,20 @@ opts = GetoptLong.new(
   [ '--file', '-f', GetoptLong::REQUIRED_ARGUMENT ],
   [ '--search', '-s', GetoptLong::REQUIRED_ARGUMENT],
   [ '--replace', '-r', GetoptLong::REQUIRED_ARGUMENT],
+  [ '--directory', '-d', GetoptLong::REQUIRED_ARGUMENT],
 )
 opts.each do |opt, arg|
   case opt
     when '--help' || '-h'
       puts <<-EOF
 
-sandr can be run with no arguments, it takes values from a config file which it will create when it runs.  The search value will be replaced by the replace value specified.
+sandr can be run with no arguments, it takes values from a config file which it will create when it runs.  The search value will be replaced by the replace value specified.  If a file and no directory is specified, the file specified in the current directory will be modified.  If a directory and no file is specified, all files within the directory will be modified.  If a file AND a directory are specified, only that file will be modified within the specified directory.
 operations:
 	sandr {-h --help}
 	sandr {-f --file} <file>
 	sandr {-s --search} <value>
 	sandr {-r --replace} <value>
+	sandr {-d --directory} <v/a/l/u/e>
 	EOF
       abort("");
     when '--file' || '-f'
@@ -29,6 +31,12 @@ operations:
     when '--replace' || '-r'
       $argsgiven=true
       $replace=arg
+    when '--directory' || '-d'
+      $dir=Dir.new(arg)
+      if !(Dir.exists?($dir))
+        abort("The specified directory does not exist");
+      end
+      $argsgiven=true
   end
 end
 def sandr(f,s,r)
@@ -37,16 +45,34 @@ def sandr(f,s,r)
     contents = File.read(f)
     File.open(f,"w+")
     contents = contents.gsub(s, r)
-    f.syswrite(contents)	
+    f.syswrite(contents)
+    f.close	
   end
 end
 def check
   if $argsgiven==true
-    if $filetosandr==nil || $search==nil || $replace==nil
-      abort( "If specified: file, search, and replace all need proper arguments\n(try --help)")
-      
+    if !(($filetosandr!=nil && $search!=nil && $replace!=nil) || ($dir!=nil && $search!=nil && $replace!=nil))
+      abort( "If specified: either (file or directory), search, and replace all need proper arguments\n(try --help)")      
     end
-    sandr($filetosandr,$search,$replace)
+    if $dir==nil
+      sandr($filetosandr,$search,$replace)
+      elsif $filetosandr!=nil
+        Dir.chdir($dir)
+        $filetosandr=File.new($filetosandr,"a+")
+        sandr($filetosandr,$search,$replace)
+      else
+      af=Dir.entries($dir)
+      i=0
+      Dir.chdir($dir)
+      while i < af.length
+        if af[i]=="."||af[i]==".."
+        else
+          temp=File.new(af[i],"a+")
+          sandr(temp,$search,$replace)
+        end
+        i=i+1
+      end
+    end
   elsif File.exists?("config") && !(File.zero?("config"))
     line = IO.readlines("config")
     filetosandr = File.new(line[0].chop,"a+")
