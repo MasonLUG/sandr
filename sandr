@@ -49,6 +49,19 @@ def sandr(f,s,r)
     f.close	
   end
 end
+def sandrdir
+  af=Dir.entries($dir)
+  i=0
+  Dir.chdir($dir)
+  while i < af.length
+    if af[i]=="."||af[i]==".."
+    else
+      temp=File.new(af[i],"a+")
+      sandr(temp,$search,$replace)
+    end
+    i=i+1
+  end
+end
 def check
   if $argsgiven==true
     if !(($filetosandr!=nil && $search!=nil && $replace!=nil) || ($dir!=nil && $search!=nil && $replace!=nil))
@@ -56,36 +69,56 @@ def check
     end
     if $dir==nil
       sandr($filetosandr,$search,$replace)
-      elsif $filetosandr!=nil
-        Dir.chdir($dir)
-        $filetosandr=File.new($filetosandr,"a+")
-        sandr($filetosandr,$search,$replace)
-      else
-      af=Dir.entries($dir)
-      i=0
+    elsif $filetosandr!=nil
       Dir.chdir($dir)
-      while i < af.length
-        if af[i]=="."||af[i]==".."
-        else
-          temp=File.new(af[i],"a+")
-          sandr(temp,$search,$replace)
-        end
-        i=i+1
-      end
+      $filetosandr=File.new($filetosandr,"a+")
+      sandr($filetosandr,$search,$replace)
+    else
+      sandrdir
     end
   elsif File.exists?("config") && !(File.zero?("config"))
     line = IO.readlines("config")
-    filetosandr = File.new(line[0].chop,"a+")
-    search = line[1].chop
-    replace = line[2].chop
-    sandr(filetosandr,search,replace)
+    if line[0][0,2]=="d="
+      $search=line[1].chop
+      $replace=line[2].chop
+      sandrdir
+    elsif line[0][0,2]=="f="
+      filetosandr = File.new(line[0][2,line[0].length].chop,"a+")
+      search = line[1].chop
+      replace = line[2].chop
+      sandr(filetosandr,search,replace)
+    else
+      puts "Config file is missing or corrupt, attempting to delete it now"
+      File.delete("config")
+      check
+    end
   else
     puts "No configuration file found!"
     puts "Generating a new one now..."
     config = File.new("config","w+")
-    puts "Please enter the name of the file to be searched"
-    fileg = gets
-    config.syswrite(fileg)
+    properinput=0
+    while properinput==0
+      puts "Would you like to modify an entire folder of files?(y/n)"
+      qin=gets.chop
+      if (qin=="y" || qin=="yes" || qin=="Yes" || qin=="YES")
+        puts "Please enter the directory"
+        inputdir=gets.chop
+        $dir=Dir.new(inputdir)
+        if !(Dir.exists?($dir))
+          puts "The specified directory does not exist"
+        else
+          config.syswrite("d="+inputdir+"\n")
+          properinput=properinput+1
+        end
+      elsif (qin=="n" || qin=="no" || qin=="No" || qin=="NO")   
+        puts "Please enter the name of the file to be searched"
+        fileg = gets
+        config.syswrite("f="+fileg)
+        properinput=properinput+1
+      else
+        puts "Invlaid input, try again"
+      end
+    end
     puts "\nPlease enter the value to search for"
     searchg = gets
     config.syswrite(searchg)
