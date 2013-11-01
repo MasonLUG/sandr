@@ -79,6 +79,7 @@ def check
   elsif File.exists?("config") && !(File.zero?("config"))
     line = IO.readlines("config")
     if line[0][0,2]=="d="
+      $dir=line[0][2,line[0].length].chop
       $search=line[1].chop
       $replace=line[2].chop
       sandrdir
