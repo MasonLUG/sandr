@@ -20,24 +20,24 @@ These projects are helpful to learn about current static site generators.
 
 Folder structure:
 ---
-.
-|-- `content`
-    |-- index.{html | md | markdown | mkd | txt | rst}
-    |-- about.markdown
-    '-- blog/
-        |-- 2014-01-30-hello-world.markdown
-|-- `media`
-    |-- css/
-    |-- js/
-    '-- images/
-|-- `templates/`
-    |-- includes/
-|-- `plugins`
-    |-- announcements.rb
-    |-- calendar.rb
+.  
+|-- `content`  
+    |-- index.{html | md | markdown | mkd | txt | rst}  
+    |-- about.markdown  
+    '-- blog/  
+        |-- 2014-01-30-hello-world.markdown  
+|-- `media`  
+    |-- css/  
+    |-- js/  
+    '-- images/  
+|-- `templates/`  
+    |-- includes/  
+|-- `plugins`  
+    |-- announcements.rb  
+    |-- calendar.rb  
 
-|-- `output`
-|-- `sandr`
+|-- `output`  
+|-- `sandr`  
 
 ----
 
@@ -45,7 +45,7 @@ A few differences than jekyll's default folder structure.
 The structure is more compact.
 
 + content   :- where the actual text resides. **No layout or design here**
-    * This will support file types html, markdown, reStructuredText and possibly
+    This will support file types html, markdown, reStructuredText and possibly
     textile.
 
 + media     :- all js, css and images reside here.
@@ -55,7 +55,7 @@ prevalant template engine for ruby at the moment. There is an example of how
 liquid is used for basically appending header and footers in the directory.
 More on that later.
 
----
+----
 
 Project based off of: [Octopress](https://github.com/imathis/octopress) and
-(wok)[https://github.com/mythmon/wok]
+[wok](https://github.com/mythmon/wok)
