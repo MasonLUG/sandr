@@ -20,24 +20,26 @@ These projects are helpful to learn about current static site generators.
 
 Folder structure:
 ---
+<pre>
 .  
-|-- `content`  
+|-- content  
     |-- index.{html | md | markdown | mkd | txt | rst}  
     |-- about.markdown  
     '-- blog/  
         |-- 2014-01-30-hello-world.markdown  
-|-- `media`  
+|-- media  
     |-- css/  
     |-- js/  
     '-- images/  
-|-- `templates/`  
+|-- templates/  
     |-- includes/  
-|-- `plugins`  
+|-- plugins  
     |-- announcements.rb  
     |-- calendar.rb  
 
-|-- `output`  
-|-- `sandr`  
+|-- output  
+|-- sandr  
+</pre>
 
 ----
 
