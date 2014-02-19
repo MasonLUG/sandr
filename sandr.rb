@@ -21,7 +21,7 @@ operations:
 	sandr {-r --replace} <value>
 	sandr {-d --directory} <v/a/l/u/e>
 	EOF
-      abort("");
+      abort("")
     when '--file' || '-f'
       $argsgiven=true
       $filetosandr=File.new(arg,"a+")
