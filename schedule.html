@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" media="screen"> <!-- what does media="screen" mean? -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>MasonLUG - Schedule</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="banner">
+	<img src="/img/gmuluglogo.png"/>
+      </div>
+      <ul id="navbar">
+    	<li><a href="/index.html">Home</a></li>
+    	<li><a href="/about/">About</a></li>
+    	<li><a href="/resources/">Resources</a></li>
+    	<li><a href="/schedule/" class="active">Schedule</a></li>
+        <li><a href="/penguin/">Penguin</a></li>
+      </ul>
+    </div>
+    <div id="content">
+      <h1>Schedule</h1>
+      <h2>Spring 2014</h2>
+      <table class="schedule">
+          <tr>
+              <td>Name</td>
+              <td>Location</td>
+              <td>Date</td>
+          </tr>
+      {{# for_each }}
+      {{ subject }}
+      {{ location }}
+      {{ date }} {{ time }}
+      {{/ for_each }}
+      </table>
+      <h2>Fall 2013</h2>
+      <table class="schedule">
+          <tr>
+              <td>Name</td>
+              <td>Location</td>
+              <td>Date</td>
+          </tr>
+      {{# for_each }}
+      {{ subject }}
+      {{ location }}
+      {{ date }} {{ time }}
+      {{/ for_each }}
+      </table>
+    </div>
+    <div id="footer">
+      <p>Copyright &copy 2014 The George Mason University GNU/Linux User Group. Updated 02/27/2014. <a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/us/">Some rights reserved.</a></span></p>
+    </div>
+  </body>
+</html>
