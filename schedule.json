@@ -1,0 +1,110 @@
+-----start file-----
+{
+  "subject": "Planning Session",
+  "date": "01/23/2014",
+  "time": "7pm to 9pm",
+  "location": "JC Meeting Room G",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "Ubuntu Core Apps Hack Day<br>(Reminders and Music)",
+  "date": "01/24/2014",
+  "time": "12pm to 5pm",
+  "location": "HUB VIP Room 3",
+  "description": "",
+  "resource_ref": "/resources/ubuntu_hackdays.html"
+  "meeting": false
+}
+{
+  "subject": "Ubuntu Core Apps Hack Day<br>(Calendar and Shorts)",
+  "date": "01/27/2014",
+  "time": "12pm to 7:30pm",
+  "location": "JC Study Room 315A",
+  "description": "",
+  "resource_ref": "/resources/ubuntu_hackdays.html"
+  "meeting": false
+}
+{
+  "subject": "Ubuntu Core Apps Hack Day<br>(Clock and Calculator)",
+  "date": "01/28/2014",
+  "time": "12pm to 7pm",
+  "location": "JC Study Room 315C",
+  "description": "",
+  "resource_ref": "/resources/ubuntu_hackdays.html"
+  "meeting": false
+}
+{
+  "subject": "hUbuntu Core Apps Hack Day<br>(File Manager and Doc Viewer)",
+  "date": "01/29/2014",
+  "time": "4pm to 8pm",
+  "location": "JC Study Room 315B",
+  "description": "",
+  "resource_ref": "/resources/ubuntu_hackdays.html"
+  "meeting": false
+}
+{
+  "subject": "Ubuntu Core Apps Hack Day<br>(Weather and Terminal)",
+  "date": "01/30/2014",
+  "time": "11am to 5pm",
+  "location": "Outside JC Study Room 219A",
+  "description": "",
+  "resource_ref": "/resources/ubuntu_hackdays.html"
+  "meeting": false
+}
+{
+  "subject": "Terminal Talk",
+  "date": "01/30/2014",
+  "time": "7pm to 9pm",
+  "location": "JC Meeting Room G",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "Emacs Talk",
+  "date": "02/06/2014",
+  "time": "7:30pm to 9pm",
+  "location": "JC Meeting Room E",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "Snow day",
+  "date": "02/13/2014",
+  "time": "7:30pm to 9pm",
+  "location": "JC Meeting Room D",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "Launchpad, GPG, and Ubuntu Touch Core Apps Introduction",
+  "date": "02/20/2014",
+  "time": "7pm to 9pm",
+  "location": "JC Meeting Room G",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "TeX",
+  "date": "02/27/2014",
+  "time": "7pm to 9pm",
+  "location": "JC Meeting Room G",
+  "description": "David Morris will be giving a talk on TeX.",
+  "resource_ref": ""
+  "meeting": true
+}
+{
+  "subject": "Haskell Scripting",
+  "date": "03/06/2014",
+  "time": "7pm to 9pm",
+  "location": "JC Meeting Room D",
+  "description": "",
+  "resource_ref": ""
+  "meeting": true
+}
+------end file------
